@@ -1,0 +1,10 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.plr.hmyukari.mixin",
+  "refmap": "refmap.hmyukari.json",
+  "client": [
+    "MixinMCBootstrap",
+    "MixinSession",
+    "MixinUUIDTypeAdapter"
+  ]
+}
