@@ -24,7 +24,6 @@ configurations {
     compile.extendsFrom(embed)
 }
 
-apply plugin: 'scala'
 apply plugin: 'forge'
 apply plugin: 'idea'
 
@@ -35,31 +34,33 @@ archivesBaseName = "${jarName}"
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-tasks.compileJava.dependsOn compileScala
-tasks.compileScala.dependsOn.remove("compileJava")
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "idea"
 }
 
-dependencies {
-    compile files("$sourceSets.main.scala.outputDir")
+repositories {
+    maven {
+        url "https://cursemaven.com"
+    }
 }
 
-processResources
-        {
-            inputs.property "version", project.version
-            inputs.property "mcversion", project.minecraft.version
+dependencies {
+    implementation("curse.maven:yukarilib-254390:2430178")
+}
 
-            from(sourceSets.main.resources.srcDirs) {
-                include 'mcmod.info'
-                expand 'version': project.version, 'mcversion': project.minecraft.version
-            }
-            from(sourceSets.main.resources.srcDirs) {
-                exclude 'mcmod.info'
-            }
-        }
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version': project.version, 'mcversion': project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
 
 //##########################################################################################################
 //########################################    Mixin  Part   ################################################
@@ -154,12 +155,6 @@ afterEvaluate {
 
 sourceSets {
     main {
-        scala {
-            outputDir = file("$buildDir/classes/scala/main")
-        }
-        java {
-            outputDir = file("$buildDir/classes/java/main")
-        }
         ext.refMap = refMapForYourConfig
     }
 }

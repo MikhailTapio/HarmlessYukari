@@ -1,14 +1,14 @@
 [
   {
-    "modid": "examplemod",
-    "name": "ExampleMod",
-    "description": "Example mixined scala mod!",
+    "modid": "hmyukari",
+    "name": "HarmlessYukari",
+    "description": "Makes YukariLib no longer harmful",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "",
     "updateUrl": "",
     "authorList": [
-      "Author"
+      "Tapio"
     ],
     "credits": "",
     "logoFile": "",
